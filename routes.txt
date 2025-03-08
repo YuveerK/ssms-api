@@ -1,0 +1,14 @@
+// Route: Test API
+app.get("/", (req, res) => {
+  res.send("🚀 SQL Server API is Running!");
+});
+
+// Route: Fetch Data from Database
+app.get("/data", async (req, res) => {
+  try {
+    const result = await sql.query("SELECT TOP 10 * FROM users");
+    res.json(result.recordset);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
